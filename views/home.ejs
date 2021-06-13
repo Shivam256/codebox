@@ -1,0 +1,37 @@
+<% layout('./layouts/boilerplate.ejs') -%>
+<link rel="stylesheet" href="/styles/home.styles.css">
+
+<div class="home-container">
+  <div class="home-greet home-sec">
+    <div class="home-greet-title my-text-gradient">CODEBOX</div>
+    <div class="home-greet-text">a single place for all your projects</div>
+    <% if(!currentUser){ %>
+    <a href="/signin">
+      <div class="home-greet-btn my-gradient">GET STARTED</div>
+    </a>
+
+    <% }else{ %>
+      <a href="">
+        <div class="home-greet-btn my-gradient">MY PROFILE</div>
+      </a>
+    <% } %>
+
+  </div>
+  <div class="home-navs home-sec">
+    <div class="home-nav home-nav-web">
+      <div class="background-image-web bi-w"></div>
+      <a href="">
+        <div class="home-nav-content hnc-w">WEB DEVELOPMENT MODE</div>
+      </a>
+    </div>
+    <div class="home-nav home-nav-cp">
+      <div class="background-image-cp bi-c"></div>
+      <a href="/cpeditor">
+        <div class="home-nav-content hnc-c">COMPETITIVE CODING MODE</div>
+      </a>
+    </div>
+    
+  </div>
+</div>
+
+<script src="/scripts/home.script.js"></script>

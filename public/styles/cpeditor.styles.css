@@ -1,0 +1,245 @@
+body {
+  height: 100vh;
+  max-height: 100vh;
+  /* display: grid;
+  place-items: center; */
+}
+
+.navbar-cp {
+  min-height: 8vh;
+  max-height: 8vh;
+  width: 95%;
+  margin: 0 auto;
+  /* background-color: red; */
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid #4cc9f0;
+  font-family: 'Josefin Sans', sans-serif;
+
+}
+
+.codebox-info {
+  width: 20%;
+  /* background-color: lawngreen; */
+  display: flex;
+  flex-direction: row;
+  color: #4cc9f0;
+}
+
+#codebox-icon {
+  width: 30%;
+  height: 100%;
+}
+#codebox-name {
+  width: 70%;
+  height: 100%;
+  /* background-color: gold; */
+  font-size: 2.5em;
+  font-weight: 700;
+  letter-spacing: 3px;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color:#4cc9f0;
+}
+
+.user-options {
+  width: 50%;
+  /* background-color: yellow; */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.select-lang {
+  width: 40%;
+  /* background-color: blue; */
+  font-size: 1.5em;
+  display: flex;
+  flex-direction: row;
+  margin-right: 20px;
+  align-items: center;
+  /* background-color: red; */
+  color: #4cc9f0;
+}
+.select-lang select {
+  width: 50%;
+  height: 60%;
+  margin: 0 15px;
+  border: none;
+  border: 2px solid #4cc9f0;
+  border-radius: 10px;
+  padding: 5px 10px 3px 10px;
+  color:#4cc9f0;
+}
+.select-lang select:focus{
+  outline: none;
+}
+
+.save-code {
+  width: 10%;
+  height: 100%;
+}
+.user-profile {
+  width: 10%;
+  height: 100%;
+}
+
+#save-code {
+  width: 45%;
+  height: 100%;
+  color: #4cc9f0;
+  cursor: pointer;
+}
+#user-profile {
+  width: 50%;
+  height: 100%;
+  color: #4cc9f0;
+  cursor: pointer;
+}
+
+.login-signup-btn{
+  width: 20%;
+  /* background-color: red; */
+  font-size: 1.3em;
+  display: grid;
+  place-items: center;
+  color: #4cc9f0;
+}
+.login-signup-btn a{
+  color:#4cc9f0;
+}
+
+
+.code-editor {
+  min-height: 90vh;
+  height: 90vh;
+  width: 95vw;
+  margin: 0 auto;
+  /* background-color: rgb(53, 53, 167); */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.editor-container {
+  width: 45%;
+  height: 95%;
+  /* background-color: rgb(23, 24, 23); */
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  /* justify-content:space-between; */
+}
+
+.editor-options {
+  height: 10%;
+  background-color: rgb(253, 253, 253);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.7em 0.8em;
+  font-size: 2em;
+  align-items: center;
+}
+
+.editor-options .run-btn {
+  width: fit-content;
+  height: fit-content;
+  background-color:#4cc9f0;
+  font-size: 0.8em;
+  padding: 5px 25px;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+.editor-options .run-btn:hover {
+  background-color: #1289ad;
+}
+
+#editor {
+  /* position: absolute; */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  /* margin-top: 10vh; */
+  font-size: 1.4em;
+  /* font-family: 'Times New Roman', Times, serif !important; */
+}
+
+.input-output-container {
+  width: 45%;
+  height: 95%;
+  /* background-color: lavender; */
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.io-sec {
+  width: 100%;
+  height: 48%;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.io-header {
+  width: 100%;
+  height: 15%;
+  /* background-color: yellow; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 2em;
+  padding-left: 20px;
+  font-weight: 700;
+  color: #4cc9f0;
+}
+
+#input-container {
+  /* position: absolute; */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  /* margin-top: 10vh; */
+  font-size: 1.4em;
+  margin-bottom: 10px;
+  /* background-color: rgb(23, 24, 23); */
+}
+
+#output-container {
+  /* position: absolute; */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  background-color: #272822;
+  color: rgb(255, 255, 255);
+  /* padding: 1em; */
+  /* margin-top: 10vh; */
+  padding: 0 1em;
+  font-size: 1.3em;
+  font-size: 1.2em;
+}

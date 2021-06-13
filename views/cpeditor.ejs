@@ -1,0 +1,79 @@
+<% layout('./layouts/boilerplate.ejs') -%>
+<link rel="stylesheet" href="/styles/cpeditor.styles.css">
+<!-- <h1>THIS IS HE CP PAGE!!!!!!</h1> -->
+<div class="navbar-cp">
+  <div class="codebox-info">
+    <span class="iconify" data-icon="ant-design:code-sandbox-outlined" data-inline="false" id="codebox-icon"></span>
+    <a href="/">
+      <div id="codebox-name">CODEBOX</div>
+    </a>
+  </div>
+  <div class="user-options">
+    <div class="select-lang">
+      LANGUAGE:
+      <select name="lang" id="lang">
+        <option value="python">Python</option>
+        <option value="javascript">Javascript</option>
+        <option value="cpp">C++</option>
+        <option value="c">C</option>
+      </select>
+    </div>
+    <div class="save-code">
+      <span class="iconify" data-icon="fa-regular:save" data-inline="false" id="save-code"></span>
+    </div>
+    <% if(currentUser){%>
+    
+    <div class="user-profile">
+      <span class="iconify" id="user-profile" data-icon="gg:profile" data-inline="false"></span>
+    </div>
+    <% }else{ %>
+      <div class="login-signup-btn"><a href="/signin">SIGN UP/LOG IN</a></div>
+      <% } %> 
+  </div>
+</div>
+
+
+
+
+<div class="code-editor">
+  <div class="editor-container my-shadow">
+    <div class="editor-options">
+      <div class="file-name">main.py</div>
+      <div class="run-btn" type="button" onclick="submitCode()">RUN</div>
+    </div>
+    <div id="editor"></div>
+  </div>
+  <div class="input-output-container">
+    <div class="input-section io-sec my-shadow">
+      <div class="input-header io-header">INPUT</div>
+      <div id="input-container"></div>
+    </div>
+    <div class="output-section io-sec my-shadow">
+      <div class="output-header io-header">OUTPUT</div>
+      <div id="output-container"></div>
+    </div>
+  </div>
+</div>
+<!-- <div class="head-section"></div>
+<div class="code-editor">
+  <div class="editor-container">
+    <div class="editor-options">
+      <button onclick="submitCode()">RUN</button>
+    </div>
+    <div id="editor"></div>
+  </div>
+  <div class="input-output-container">
+    <div class="input-options">
+      INPUT :
+    </div>
+    <div id="input-container"></div>
+    <div class="output-options">
+      OUTPUT :
+    </div>
+    <div id="output-container"></div>
+  </div>
+</div> -->
+<script src="https://pagecdn.io/lib/ace/1.4.12/ace.js" crossorigin="anonymous"
+  integrity="sha256-Q9hnBpgBFstzZOr+OKFOWZWfcF5nFXO8Qz48Nmndo6U="></script>
+<script src="/scripts/languages.js"></script>
+<script src="/scripts/cpeditor.script.js"></script>

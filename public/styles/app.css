@@ -1,0 +1,39 @@
+*{
+  /* font-family: 'Josefin Sans', sans-serif; */
+  margin: 0;
+  box-sizing: border-box;
+  /* padding: 0; */
+}
+a{
+  text-decoration: none;
+}
+
+.my-shadow{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.my-gradient{
+  background: linear-gradient(90deg, #7209b7 0%, #b5179e 100%);
+}
+.my-btn{
+  width: fit-content;
+  height: fit-content;
+  padding: 5px 30px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.5em;
+  border: none;
+}
+.my-btn:hover{
+  background: linear-gradient(90deg, #B5179E 0%, #F72585 100%);
+}
+
+.my-text-gradient{
+  background: #7209b7;
+  background: -webkit-linear-gradient(to right, #7209b7 0%, #f72585 100%);
+  background: -moz-linear-gradient(to right, #7209b7 0%, #f72585 100%);
+  background: linear-gradient(to right, #7209b7 0%, #f72585 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
