@@ -4,12 +4,13 @@ if (process.NODE_ENV !== "production") {
 
 const express = require("express");
 const app = express();
-const PORT = 8080;
+const PORT = 80;
 const engine = require("ejs-mate");
 const path = require("path");
 const mongoose = require("mongoose");
 const flash = require("connect-flash");
 const request = require('request');
+const axios = require('axios');
 
 
 const session = require("express-session");
@@ -92,20 +93,25 @@ app.post('/compile',async (req,res)=>{
     clientSecret:process.env.MY_CLIENT_SECRET
   }
 
-  request({
-    url: 'https://api.jdoodle.com/v1/execute',
-    method: "POST",
-    json: program
-  },
-  function (error, response, body) {
-    const result = {
-      body:body,
-      stautusCode : response && response.statusCode,
-      error:error
-    }
-    console.log(result);
-    return  res.send(result);
-  });
+  const url_ = 'https://api.jdoodle.com/v1/execute';
+  const response = await axios.post(url_,program)
+  const result = response.data;
+  return res.send(result);
+
+  // request({
+  //   url: 'https://api.jdoodle.com/v1/execute',
+  //   method: "POST",
+  //   json: program
+  // },
+  // function (error, response, body) {
+  //   const result = {
+  //     body:body,
+  //     stautusCode : response && response.statusCode,
+  //     error:error
+  //   }
+  //   console.log(result);
+  //   return  res.send(result);
+  // });
   
   
 })

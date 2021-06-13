@@ -52,6 +52,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  font-size: 1em;
 }
 
 .select-lang {
@@ -66,7 +67,7 @@ body {
   color: #4cc9f0;
 }
 .select-lang select {
-  width: 50%;
+  width: fit-content;
   height: 60%;
   margin: 0 15px;
   border: none;
@@ -102,9 +103,9 @@ body {
 }
 
 .login-signup-btn{
-  width: 20%;
+  width: 25%;
   /* background-color: red; */
-  font-size: 1.3em;
+  font-size: 1.1em;
   display: grid;
   place-items: center;
   color: #4cc9f0;

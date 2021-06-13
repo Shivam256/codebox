@@ -16,6 +16,9 @@ inputEditor.setTheme("ace/theme/monokai");
 inputEditor.session.setMode("ace/mode/txt");
 
 const outputEditor = document.querySelector("#output-container");
+
+const currentUser = outputEditor.dataset.currentUser;
+
 const langSelect = document.querySelector("#lang");
 const filename = document.querySelector(".file-name");
 const saveBtn = document.querySelector("#save-code");
@@ -78,10 +81,10 @@ const submitCode = async () => {
     userInput: userinput,
   };
 
-  const url = "http://localhost:8080/compile";
+  const url = "http://localhost:80/compile";
   await $.post(url, data, (d) => {
     // console.log(d,d.body.output);
-    const formattedOutput = formatOutput(d.body.output);
+    const formattedOutput = formatOutput(d.output);
     outputEditor.innerHTML = formattedOutput;
   });
 };
@@ -95,10 +98,12 @@ const saveCode = async () => {
     lang: language,
     versionIndex: vIndex,
   };
-  const url = "http://localhost:8080/cpeditor/save";
+  const url = "http://localhost:80/cpeditor/save";
   await $.post(url, data);
 };
 
-saveBtn.addEventListener("click", () => {
-  saveCode();
-});
+if (currentUser != "null") {
+  saveBtn.addEventListener("click", () => {
+    saveCode();
+  });
+}

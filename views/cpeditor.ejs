@@ -18,17 +18,16 @@
         <option value="c">C</option>
       </select>
     </div>
+    <% if(currentUser){%>
     <div class="save-code">
       <span class="iconify" data-icon="fa-regular:save" data-inline="false" id="save-code"></span>
     </div>
-    <% if(currentUser){%>
-    
     <div class="user-profile">
       <span class="iconify" id="user-profile" data-icon="gg:profile" data-inline="false"></span>
     </div>
     <% }else{ %>
-      <div class="login-signup-btn"><a href="/signin">SIGN UP/LOG IN</a></div>
-      <% } %> 
+    <div class="login-signup-btn"><a href="/signin">SIGN UP/LOG IN</a></div>
+    <% } %>
   </div>
 </div>
 
@@ -50,7 +49,7 @@
     </div>
     <div class="output-section io-sec my-shadow">
       <div class="output-header io-header">OUTPUT</div>
-      <div id="output-container"></div>
+      <div id="output-container" data-current-user = "<%= currentUser? currentUser: 'null'  %>"></div>
     </div>
   </div>
 </div>

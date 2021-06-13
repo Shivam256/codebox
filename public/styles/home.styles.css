@@ -41,14 +41,14 @@ body {
   color: white;
 }
 .home-greet-text {
-  font-size: 4em;
+  font-size: 3.5em;
   letter-spacing: 2px;
   margin-bottom: 50px;
   color: white;
 }
 
 .home-greet-btn {
-  font-size: 3em;
+  font-size: 2em;
   width: fit-content;
   height: fit-content;
   font-weight: 700;
@@ -100,7 +100,7 @@ body {
 } */
 
 .home-nav-content {
-  font-size: 3em;
+  font-size: 2.3em;
   letter-spacing: 3px;
   font-weight: 600;
   color: white;
