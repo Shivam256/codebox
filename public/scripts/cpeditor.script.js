@@ -21,7 +21,10 @@ const currentUser = outputEditor.dataset.currentUser;
 
 const langSelect = document.querySelector("#lang");
 const filename = document.querySelector(".file-name");
+
 const saveBtn = document.querySelector("#save-code");
+const codeName = document.querySelector("#code-name");
+// saveBtn.style.backgroundColor = "red";
 
 const setLanguage = (lang) => {
   editor.session.setMode(`ace/mode/${languages[lang].ace}`);
@@ -89,7 +92,11 @@ const submitCode = async () => {
   });
 };
 
-const saveCode = async () => {
+
+
+const saveCode = () => {
+  // alert("hewefn");
+  // console.log('i got clicekd')
   const code = editor.getSession().getValue();
   const language = languages[currentLang].code;
   const vIndex = languages[currentLang].vIndex;
@@ -97,13 +104,18 @@ const saveCode = async () => {
     userCode: code,
     lang: language,
     versionIndex: vIndex,
+    title:codeName.value
   };
   const url = "http://localhost:80/cpeditor/save";
-  await $.post(url, data);
+  $.post(url, data);
 };
 
-if (currentUser != "null") {
-  saveBtn.addEventListener("click", () => {
-    saveCode();
-  });
-}
+// if (currentUser != "null") {
+//   saveBtn.addEventListener("click", () => {
+//     saveCode();
+//   });
+// }
+
+// saveBtn.addEventListener("click", () => {
+//   saveCode();
+// });

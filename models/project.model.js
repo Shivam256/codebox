@@ -7,6 +7,7 @@ const ProjectSchema = new Schema({
     required:true
   },
   language:String,
+  versionIndex:Number,
   author:{
     type:Schema.Types.ObjectId,
     ref:'User'

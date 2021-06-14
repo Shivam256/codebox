@@ -9,7 +9,6 @@ const engine = require("ejs-mate");
 const path = require("path");
 const mongoose = require("mongoose");
 const flash = require("connect-flash");
-const request = require('request');
 const axios = require('axios');
 
 
@@ -21,6 +20,7 @@ const User = require("./models/user.model");
 const catchAsync = require("./utils/catchAsync");
 
 const MyError = require('./utils/MyErrors');
+const saveProject = require('./utils/saveProject');
 
 
 app.engine("ejs", engine);
@@ -82,7 +82,7 @@ app.get('/cpeditor',(req,res)=>{
 
 
 app.post('/compile',async (req,res)=>{
-  console.log(req.body);
+  // console.log(req.body);
   const {userCode,lang,versionIndex,userInput} = req.body;
   const program = {
     script : userCode,
@@ -156,7 +156,7 @@ app.post(
     failureRedirect: "/signin",
   }),
   catchAsync(async (req, res) => {
-    console.log(req);
+    // console.log(req);
     res.redirect("/");
   })
 );
@@ -167,11 +167,15 @@ app.get('/logout',(req,res)=>{
 })
 
 
-app.post('/cpeditor/save',(req,res)=>{
+
+app.post('/cpeditor/save',catchAsync(async (req,res)=>{
   console.log('I GOT FIREDDDDDD');
   console.log(req.body);
+  const {userCode,lang,versionIndex,title} = req.body;
+  const user = req.user;
+  await saveProject(user,title,lang,userCode,versionIndex);
   res.send('yay');
-})
+}))
 
 
 

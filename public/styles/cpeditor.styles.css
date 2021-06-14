@@ -37,7 +37,7 @@ body {
   width: 70%;
   height: 100%;
   /* background-color: gold; */
-  font-size: 2.5em;
+  font-size: 2em;
   font-weight: 700;
   letter-spacing: 3px;
   height: 100%;
@@ -58,7 +58,7 @@ body {
 .select-lang {
   width: 40%;
   /* background-color: blue; */
-  font-size: 1.5em;
+  font-size: 1.2em;
   display: flex;
   flex-direction: row;
   margin-right: 20px;
@@ -147,7 +147,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   padding: 0.7em 0.8em;
-  font-size: 2em;
+  font-size: 1.5em;
   align-items: center;
 }
 
@@ -208,7 +208,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: 2em;
+  font-size: 1.5em;
   padding-left: 20px;
   font-weight: 700;
   color: #4cc9f0;
@@ -243,4 +243,8 @@ body {
   padding: 0 1em;
   font-size: 1.3em;
   font-size: 1.2em;
+  overflow-y: scroll;
+}
+#output-container::-webkit-scrollbar{
+  display: none;
 }
