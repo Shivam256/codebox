@@ -1,0 +1,241 @@
+body {
+  min-height: 100vh;
+  max-height: 100vh;
+  width: 100vw;
+  background-image: url("https://res.cloudinary.com/dx1ye2bro/image/upload/v1624173081/Group_21_blqdnk.jpg");
+  background-position: center;
+  display: grid;
+  place-items: center;
+  background-size: cover;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.user-page{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  justify-content: space-between;
+  /* background-color: red; */
+}
+
+.user-profile{
+  width: 25%;
+  height: 70%;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+
+.user-profile .user-image {
+  width: 30%;
+  height: 20%;
+  /* background-color: red; */
+}
+
+#user-img{
+  width: 100%;
+  height: 100%;
+  color: #7209B7;
+}
+
+.user-username{
+  font-size: 2em;
+  color: #7209B7;
+}
+
+
+.user-project-count{
+  font-size: 1.5em;
+  color: #F72585;
+}
+
+
+.user-projects{
+  width: 75%;
+  height: 100%;
+  /* background-color: blue; */
+  display:grid;
+  place-items: center;
+}
+
+.projects-section{
+  width: 95%;
+  height: 90%;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+.search-projects{
+  width: 100%;
+  height: 10%;
+  /* background-color: green; */
+  display: grid;
+  place-items: center;
+}
+.search-projects > input{
+  width: 50%;
+  border: none;
+  border-radius: 20px;
+  text-align:center;
+  color: #F72585;
+  height: 50%;
+
+}
+
+.search-projects > input:focus{
+  outline: none;
+}
+
+.search-projects>input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color: #F72585;
+  
+}
+.search-projects>input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: #F72585;
+ 
+ opacity:  1;
+}
+.search-projects>input::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: #F72585;
+ 
+ opacity:  1;
+}
+.search-projects>input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #F72585;
+ 
+}
+.search-projects>input::-ms-input-placeholder { /* Microsoft Edge */
+  color: #F72585;
+ 
+}
+
+.search-projects>input::placeholder { /* Most modern browsers support this now. */
+  color: #F72585;
+ 
+}
+
+.projects{
+  width: 100%;
+  max-height: 80%;
+  /* background-color: yellow; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  overflow-y: scroll;
+
+}
+.projects::-webkit-scrollbar{
+  display: none;
+}
+
+
+.project-container{
+  width: 30%;
+  height:40%;
+  background-color: white;
+  margin: 0 1em 2em 1em;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+}
+.project-container:hover{
+  background-color: rgba(255, 255, 255, 0.925);
+  /* transform: scale(1.05); */
+}
+
+.project-title{
+  font-size: 1.8em;
+  /* color: #F72585; */
+  color: #2D2A2E;
+
+}
+
+.delete-project-icon{
+  height: 15%;
+  width: 60%;
+  /* background-color: red; */
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  margin-top: 1em;
+}
+.delete-icon{
+  width: 50%;
+  height: 100%;
+  color: red;
+  display: inline;
+}
+.delete-icon:hover{
+  color: rgb(199, 0, 0);
+}
+
+.edit-icon{
+  width: 50%;
+  height: 100%;
+  color: blue;
+  display: inline;
+}
+/* .delete-project-icon:hover{
+  transform: scale(1.05);
+} */
+
+.project-language-icon{
+  height: 45%;
+  width: 30%;
+  margin: 1em 0 0em 0;
+  /* background-color: red; */
+}
+
+.project-icon{
+  height: 100%;
+  width: 100%;
+  color: #7209B7;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+
+
+
+.my-btn2{
+  width:45% ;
+  color:white;
+  text-align: center;
+  padding: 0.3em 0;
+  border: 2px solid #7209B7;
+  cursor: pointer;
+  font-weight: 600;
+ font-size: 1.2em; 
+}
+.my-btn2 a{
+  color: #7209B7;
+}
+
+.my-btn2:hover{
+  background-color: #7209B7;
+}
+.my-btn2:hover >a{
+  color: white;
+}
+
+.create-btns{
+  width: 60%;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

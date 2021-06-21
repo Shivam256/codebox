@@ -9,19 +9,18 @@ const engine = require("ejs-mate");
 const path = require("path");
 const mongoose = require("mongoose");
 const flash = require("connect-flash");
-const axios = require('axios');
-
+const axios = require("axios");
 
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 
 const User = require("./models/user.model");
+const Project  = require('./models/project.model');
 const catchAsync = require("./utils/catchAsync");
 
-const MyError = require('./utils/MyErrors');
-const saveProject = require('./utils/saveProject');
-
+const MyError = require("./utils/MyErrors");
+const saveProject = require("./utils/saveProject");
 
 app.engine("ejs", engine);
 app.set("view engine", "ejs");
@@ -76,46 +75,27 @@ app.get("/signin", (req, res) => {
   res.render("sign-in-and-sign-up", { message: req.flash("error") });
 });
 
-app.get('/cpeditor',(req,res)=>{
-  res.render('cpeditor')
-})
+app.get("/cpeditor", (req, res) => {
+  res.render("cpeditor");
+});
 
-
-app.post('/compile',async (req,res)=>{
+app.post("/compile", async (req, res) => {
   // console.log(req.body);
-  const {userCode,lang,versionIndex,userInput} = req.body;
+  const { userCode, lang, versionIndex, userInput } = req.body;
   const program = {
-    script : userCode,
+    script: userCode,
     language: lang,
     versionIndex: versionIndex,
-    stdin:userInput,
+    stdin: userInput,
     clientId: process.env.MY_CLIENT_ID,
-    clientSecret:process.env.MY_CLIENT_SECRET
-  }
+    clientSecret: process.env.MY_CLIENT_SECRET,
+  };
 
-  const url_ = 'https://api.jdoodle.com/v1/execute';
-  const response = await axios.post(url_,program)
+  const url_ = "https://api.jdoodle.com/v1/execute";
+  const response = await axios.post(url_, program);
   const result = response.data;
   return res.send(result);
-
-  // request({
-  //   url: 'https://api.jdoodle.com/v1/execute',
-  //   method: "POST",
-  //   json: program
-  // },
-  // function (error, response, body) {
-  //   const result = {
-  //     body:body,
-  //     stautusCode : response && response.statusCode,
-  //     error:error
-  //   }
-  //   console.log(result);
-  //   return  res.send(result);
-  // });
-  
-  
-})
-
+});
 
 app.post(
   "/signup",
@@ -161,41 +141,55 @@ app.post(
   })
 );
 
-app.get('/logout',(req,res)=>{
+app.get("/logout", (req, res) => {
   req.logout();
-  res.redirect('/');
-})
+  res.redirect("/");
+});
+
+app.post(
+  "/cpeditor/save",
+  catchAsync(async (req, res) => {
+    // console.log('I GOT FIREDDDDDD');
+    // console.log(req.body);
+    const { userCode, lang, versionIndex, title } = req.body;
+    const user = req.user;
+    await saveProject(user, title, lang, userCode, versionIndex);
+    res.send("yay");
+  })
+);
 
 
 
-app.post('/cpeditor/save',catchAsync(async (req,res)=>{
-  console.log('I GOT FIREDDDDDD');
-  console.log(req.body);
-  const {userCode,lang,versionIndex,title} = req.body;
-  const user = req.user;
-  await saveProject(user,title,lang,userCode,versionIndex);
-  res.send('yay');
+//user routes
+app.get("/user/:id",catchAsync(async (req,res)=>{
+  const {id} = req.params;
+  const user = await User.findById(id).populate('projects');
+
+  // console.log(user);
+  res.render('user',{user});
 }))
 
+// app.get('/cpeditor/:projectId',catchAsync(async (req,res)=>{
+//   const {projectId} = req.params;
+//   const project = await 
+// }))
 
 
 
 
 
-app.all('*', (req, res, next) => {
-  next(new MyError('Page Not Found!', 404));
-})
+app.all("*", (req, res, next) => {
+  next(new MyError("Page Not Found!", 404));
+});
 
-app.use((err,req,res,next)=>{
-  const {statusCode = 500} = err;
-  if(!err.message){
-    err.message = 'SOMETHING WENT WRONG!!!!';
+app.use((err, req, res, next) => {
+  const { statusCode = 500 } = err;
+  if (!err.message) {
+    err.message = "SOMETHING WENT WRONG!!!!";
   }
 
-  res.status(statusCode).render('error',{err})
-})
-
-
+  res.status(statusCode).render("error", { err });
+});
 
 app.listen(PORT, () => {
   console.log(`Server statted on port ${PORT}`);

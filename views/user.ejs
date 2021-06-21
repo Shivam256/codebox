@@ -1,0 +1,42 @@
+<% layout('./layouts/boilerplate.ejs') -%>
+<link rel="stylesheet" href="/styles/user.styles.css">
+<div class="user-page">
+  <div class="user-profile">
+    <div class="user-image"><span class="iconify" id="user-img" data-icon="gg:profile" data-inline="false"></span></div>
+    <div class="user-username"><%= user.username  %></div>
+    <div class="user-project-count"> <%= user.projects.length %> <%= user.projects.length == 1? 'Project':'Projects'  %>
+    </div>
+    <div class="create-btns">
+      <div class="my-btn2"><a href="/cpeditor">CP</a></div>
+    <div class="my-btn2"><a href="">WEB</a></div>
+    </div>
+    <form action="/logout" method="GET">
+      <button class="user-logout-btn my-gradient my-btn">LOGOUT</button>
+    </form>
+  </div>
+  <div class="user-projects">
+    <div class="projects-section">
+      <div class="search-projects"><input type="text" placeholder="search projects" name="" id=""></div>
+      <div class="projects">
+        <% for(let project of user.projects){ %>
+          <div class="project-container">
+            <div class="project-title"><%= project.title  %> </div>
+            <div class="project-language-icon">
+              <span class="iconify project-icon"  data-inline="false" data-name =<%= project.language  %> ></span>
+            </div>
+            <div class="delete-project-icon">
+              <span class="iconify delete-icon" data-icon="carbon:delete" data-inline="false"></span>
+              <span class="iconify edit-icon" data-icon="akar-icons:edit" data-inline="false"></span>
+            </div>
+          </div>
+
+
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="/scripts/iconmap.js"></script>
+<script src="/scripts/user.script.js"></script>

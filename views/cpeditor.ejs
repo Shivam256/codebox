@@ -18,14 +18,13 @@
         <option value="c">C</option>
       </select>
     </div>
+    <% if(currentUser){%>
     <div class="save-code">
       <span class="iconify" data-icon="fa-regular:save" data-inline="false" id="save-code" data-bs-toggle="modal"
         data-bs-target="#exampleModal"></span>
     </div>
-    <% if(currentUser){%>
-
     <div class="user-profile">
-      <span class="iconify" id="user-profile" data-icon="gg:profile" data-inline="false"></span>
+      <a href="/user/<%= currentUser._id  %>"><span class="iconify" id="user-profile" data-icon="gg:profile" data-inline="false"></span></a>
     </div>
     <% }else{ %>
     <div class="login-signup-btn"><a href="/signin">SIGN UP/LOG IN</a></div>

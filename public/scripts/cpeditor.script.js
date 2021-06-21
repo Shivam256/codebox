@@ -7,6 +7,8 @@ editor.setOptions({
   enableLiveAutocompletion: false,
 });
 
+
+
 if (sessionStorage.getItem("currCode")) {
   editor.setValue(sessionStorage.getItem("currCode"), 1);
 }

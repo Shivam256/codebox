@@ -14,6 +14,10 @@ const UserSchema = new Schema({
   }]
 })
 
+// UserSchema.virtual('projectCount').get(fucntion(){
+//   return 
+// })
+
 UserSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('User',UserSchema);

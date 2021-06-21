@@ -178,6 +178,9 @@ body {
   font-size: 1.4em;
   /* font-family: 'Times New Roman', Times, serif !important; */
 }
+#editor::-webkit-scrollbar{
+  display: none;
+}
 
 .input-output-container {
   width: 45%;
@@ -247,4 +250,9 @@ body {
 }
 #output-container::-webkit-scrollbar{
   display: none;
+}
+.ace_scrollbar-v,.ace_scrollbar-h{
+  background-color: red;
+  /* min-width: 0vw; */
+  max-width: 0;
 }
