@@ -256,3 +256,8 @@ body {
   /* min-width: 0vw; */
   max-width: 0;
 }
+
+
+#invisible-container{
+  display: none;
+}

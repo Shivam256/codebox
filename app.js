@@ -76,7 +76,8 @@ app.get("/signin", (req, res) => {
 });
 
 app.get("/cpeditor", (req, res) => {
-  res.render("cpeditor");
+  const project = null;
+  res.render("cpeditor",{project});
 });
 
 app.post("/compile", async (req, res) => {
@@ -169,10 +170,11 @@ app.get("/user/:id",catchAsync(async (req,res)=>{
   res.render('user',{user});
 }))
 
-// app.get('/cpeditor/:projectId',catchAsync(async (req,res)=>{
-//   const {projectId} = req.params;
-//   const project = await 
-// }))
+app.get('/cpeditor/:projectId',catchAsync(async (req,res)=>{
+  const {projectId} = req.params;
+  const project = await Project.findById(projectId);
+  res.render('cpeditor',{project});
+}))
 
 
 

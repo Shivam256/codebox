@@ -19,7 +19,7 @@
       <div class="search-projects"><input type="text" placeholder="search projects" name="" id=""></div>
       <div class="projects">
         <% for(let project of user.projects){ %>
-          <div class="project-container">
+          <a class="project-container" href="/cpeditor/<%= project._id  %>">
             <div class="project-title"><%= project.title  %> </div>
             <div class="project-language-icon">
               <span class="iconify project-icon"  data-inline="false" data-name =<%= project.language  %> ></span>
@@ -28,9 +28,7 @@
               <span class="iconify delete-icon" data-icon="carbon:delete" data-inline="false"></span>
               <span class="iconify edit-icon" data-icon="akar-icons:edit" data-inline="false"></span>
             </div>
-          </div>
-
-
+          </a>
         <% } %>
       </div>
     </div>

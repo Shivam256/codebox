@@ -9,10 +9,6 @@ editor.setOptions({
 
 
 
-if (sessionStorage.getItem("currCode")) {
-  editor.setValue(sessionStorage.getItem("currCode"), 1);
-}
-
 const inputEditor = ace.edit("input-container");
 inputEditor.setTheme("ace/theme/monokai");
 inputEditor.session.setMode("ace/mode/txt");
@@ -28,17 +24,32 @@ const saveBtn = document.querySelector("#save-code");
 const codeName = document.querySelector("#code-name");
 // saveBtn.style.backgroundColor = "red";
 
+let projectTitle = null,projectCode = null,projectLang = null;
+
+const projectData = document.querySelector("#invisible-container");
+if(projectData.dataset.projectTitle){
+  projectTitle = projectData.dataset.projectTitle;
+  projectCode = projectData.dataset.projectCode;
+  projectLang = langIcons[projectData.dataset.projectLang].name;
+}
+
 const setLanguage = (lang) => {
   editor.session.setMode(`ace/mode/${languages[lang].ace}`);
   currentLang = lang;
-  filename.textContent = languages[lang].filename;
+  filename.textContent = projectTitle || languages[lang].filename;
   sessionStorage.setItem("currLang", lang);
   langSelect.value = lang;
 };
 
-let currentLang = sessionStorage.getItem("currLang") || "python";
+let currentLang = projectLang || sessionStorage.getItem("currLang") || "python";
 setLanguage(currentLang);
 
+if(projectCode){
+  editor.setValue(projectCode); 
+}
+else if(sessionStorage.getItem("currCode")){
+  editor.setValue(sessionStorage.getItem("currCode"), 1);
+}
 // const outputEdiitor = ace.edit('output-container');
 // outputEdiitor.setTheme("ace/theme/monokai");
 // outputEdiitor.session.setMode("ace/mode/txt");
@@ -94,8 +105,6 @@ const submitCode = async () => {
   });
 };
 
-
-
 const saveCode = () => {
   // alert("hewefn");
   // console.log('i got clicekd')
@@ -106,7 +115,7 @@ const saveCode = () => {
     userCode: code,
     lang: language,
     versionIndex: vIndex,
-    title:codeName.value
+    title: codeName.value,
   };
   const url = "http://localhost:80/cpeditor/save";
   $.post(url, data);

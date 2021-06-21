@@ -68,9 +68,20 @@
     </div>
     <div class="output-section io-sec my-shadow">
       <div class="output-header io-header">OUTPUT</div>
-      <div id="output-container" data-current-user="<%= currentUser? currentUser: 'null'  %>"></div>
+      <div id="output-container" data-current-user="<%= currentUser? currentUser: 'null'  %>" ></div>
     </div>
   </div>
+  <% if(project){ %>
+    <div id="invisible-container"
+      data-project-title = "<%= project.title   %>"
+      data-project-lang = "<%= project.language  %>"
+      data-project-code = "<%= project.code  %>"
+    >
+
+    </div>
+  <% }else{ %>
+    <div id="invisible-container"></div>
+  <% } %>       
 </div>
 <!-- <div class="head-section"></div>
 <div class="code-editor">
@@ -93,5 +104,6 @@
 </div> -->
 <script src="https://pagecdn.io/lib/ace/1.4.12/ace.js" crossorigin="anonymous"
   integrity="sha256-Q9hnBpgBFstzZOr+OKFOWZWfcF5nFXO8Qz48Nmndo6U="></script>
+  <script src="/scripts/iconmap.js"></script>
 <script src="/scripts/languages.js"></script>
 <script src="/scripts/cpeditor.script.js"></script>
