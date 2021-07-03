@@ -16,11 +16,14 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 
 const User = require("./models/user.model");
-const Project  = require('./models/project.model');
+const Project = require("./models/project.model");
 const catchAsync = require("./utils/catchAsync");
 
 const MyError = require("./utils/MyErrors");
 const saveProject = require("./utils/saveProject");
+
+
+const {isUserLoggedIn,isProjectAuthor} = require('./middlewares');
 
 app.engine("ejs", engine);
 app.set("view engine", "ejs");
@@ -77,7 +80,7 @@ app.get("/signin", (req, res) => {
 
 app.get("/cpeditor", (req, res) => {
   const project = null;
-  res.render("cpeditor",{project});
+  res.render("cpeditor", { project });
 });
 
 app.post("/compile", async (req, res) => {
@@ -159,26 +162,26 @@ app.post(
   })
 );
 
-
-
 //user routes
-app.get("/user/:id",catchAsync(async (req,res)=>{
-  const {id} = req.params;
-  const user = await User.findById(id).populate('projects');
+app.get(
+  "/user/:id",isUserLoggedIn,
+  catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const user = await User.findById(id).populate("projects");
 
-  // console.log(user);
-  res.render('user',{user});
-}))
+    // console.log(user);
+    res.render("user", { user });
+  })
+);
 
-app.get('/cpeditor/:projectId',catchAsync(async (req,res)=>{
-  const {projectId} = req.params;
-  const project = await Project.findById(projectId);
-  res.render('cpeditor',{project});
-}))
-
-
-
-
+app.get(
+  "/cpeditor/:projectId",isUserLoggedIn,isProjectAuthor,
+  catchAsync(async (req, res) => {
+    const { projectId } = req.params;
+    const project = await Project.findById(projectId);
+    res.render("cpeditor", { project });
+  })
+);
 
 app.all("*", (req, res, next) => {
   next(new MyError("Page Not Found!", 404));
