@@ -8,7 +8,7 @@
     </div>
     <div class="create-btns">
       <div class="my-btn2"><a href="/cpeditor">CP</a></div>
-    <div class="my-btn2"><a href="">WEB</a></div>
+      <div class="my-btn2"><a href="">WEB</a></div>
     </div>
     <form action="/logout" method="GET">
       <button class="user-logout-btn my-gradient my-btn">LOGOUT</button>
@@ -18,19 +18,29 @@
     <div class="projects-section">
       <div class="search-projects"><input type="text" placeholder="search projects" name="" id=""></div>
       <div class="projects">
+        <% if(1==1){ %>
         <% for(let project of user.projects){ %>
-          <a class="project-container" href="/cpeditor/<%= project._id  %>">
-            <div class="project-title"><%= project.title  %> </div>
+          <a href="/cpeditor/<%= project._id  %>" class="project-container">
+            <div class="project-title"><%= project.title  %></div>
             <div class="project-language-icon">
-              <span class="iconify project-icon"  data-inline="false" data-name =<%= project.language  %> ></span>
+              <span class="iconify project-icon" data-inline="false" data-name="<%= project.language %>"></span>
             </div>
-            <div class="delete-project-icon">
-              <span class="iconify delete-icon" data-icon="carbon:delete" data-inline="false"></span>
-              <span class="iconify edit-icon" data-icon="akar-icons:edit" data-inline="false"></span>
-            </div>
+        
           </a>
+        <!-- <a class="project-container" href="/cpeditor/<%= project._id  %>">
+          <div class="project-title"><%= project.title  %> </div>
+          <div class="project-language-icon">
+            <span class="iconify project-icon" data-inline="false" data-name=<%= project.language  %>></span>
+          </div>
+          <div class="delete-project-icon">
+            <span class="iconify delete-icon" data-icon="carbon:delete" data-inline="false"></span>
+            <span class="iconify edit-icon" data-icon="akar-icons:edit" data-inline="false"></span>
+          </div>
+        </a> -->
+        <% } %>
         <% } %>
       </div>
+      <!-- <div class="i-footer"></div> -->
     </div>
   </div>
 </div>

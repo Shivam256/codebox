@@ -20,8 +20,13 @@
     </div>
     <% if(currentUser){%>
     <div class="save-code">
+      <% if(!project){ %> 
       <span class="iconify" data-icon="fa-regular:save" data-inline="false" id="save-code" data-bs-toggle="modal"
         data-bs-target="#exampleModal"></span>
+      <% }else{ %>   
+        <span class="iconify" data-icon="fa-regular:save" data-inline="false" id="save-code" 
+         onclick="saveCode()"></span>
+      <% } %>  
     </div>
     <div class="user-profile">
       <a href="/user/<%= currentUser._id  %>"><span class="iconify" id="user-profile" data-icon="gg:profile" data-inline="false"></span></a>

@@ -1,6 +1,6 @@
-const User = require("./models/user.model");
+// const User = require("./models/user.model");
 const Project = require("./models/project.model");
-const catchAsync = require("./utils/catchAsync");
+// const catchAsync = require("./utils/catchAsync");
 
 module.exports.isUserLoggedIn = (req,res,next)=>{
   if(req.isAuthenticated()){

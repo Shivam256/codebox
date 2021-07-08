@@ -21,6 +21,9 @@ const catchAsync = require("./utils/catchAsync");
 
 const MyError = require("./utils/MyErrors");
 const saveProject = require("./utils/saveProject");
+const createWebPage = require('./utils/createWebHtml');
+
+const fs = require('fs');
 
 
 const {isUserLoggedIn,isProjectAuthor} = require('./middlewares');
@@ -83,7 +86,12 @@ app.get("/cpeditor", (req, res) => {
   res.render("cpeditor", { project });
 });
 
-app.post("/compile", async (req, res) => {
+app.get("/webeditor",(req,res)=>{
+  const project = null;
+  res.render("webeditor",{project});
+})
+
+app.post("/cp/compile", async (req, res) => {
   // console.log(req.body);
   const { userCode, lang, versionIndex, userInput } = req.body;
   const program = {
@@ -100,6 +108,20 @@ app.post("/compile", async (req, res) => {
   const result = response.data;
   return res.send(result);
 });
+
+app.post('/web/compile',async (req,res)=>{
+  console.log("you hit me!!");
+  // console.log(req.body);
+  
+  const webPage = createWebPage(req.body);
+  // console.log(webPage);
+  try{
+    const data = fs.writeFileSync('./public/html/demo.html',webPage);
+  }catch(err){
+    console.log(err);
+  }
+  res.send("wekjnwe");
+})
 
 app.post(
   "/signup",
@@ -155,10 +177,22 @@ app.post(
   catchAsync(async (req, res) => {
     // console.log('I GOT FIREDDDDDD');
     // console.log(req.body);
-    const { userCode, lang, versionIndex, title } = req.body;
+    const { userCode, lang, versionIndex, title ,isAlreadySaved} = req.body;
     const user = req.user;
+    // console.log('You hit me!');
+    // console.log(req.body);
+    if(isAlreadySaved == 'true'){
+      // const project = await Project.find({title:title});
+      await Project.findOneAndUpdate({title:title},{code:userCode})
+      // console.log(project);
+      //console.log(userCode);
+      // project.code = userCode;
+      // await project.save();
+      // console.log(project);
+      return res.send('yay');
+    }
     await saveProject(user, title, lang, userCode, versionIndex);
-    res.send("yay");
+    res.send("wekfjnwe");
   })
 );
 
@@ -168,7 +202,7 @@ app.get(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const user = await User.findById(id).populate("projects");
-
+    console.log(user.projects);
     // console.log(user);
     res.render("user", { user });
   })

@@ -1,0 +1,54 @@
+<% layout('./layouts/boilerplate.ejs') -%>
+<link rel="stylesheet" href="/styles/webeditor.styles.css">
+<div class="navbar-web">
+  <div class="codebox-info">
+    <span class="iconify" data-icon="ant-design:code-sandbox-outlined" data-inline="false" id="codebox-icon"></span>
+    <a href="/">
+      <div id="codebox-name">CODEBOX</div>
+    </a>
+  </div>
+  <div class="codebox-options">
+    <div class="refresh-btn">REFRESH</div>
+    <% if(currentUser){%>
+      <div class="save-code">
+        <% if(!project){ %> 
+        <span class="iconify" data-icon="fa-regular:save" data-inline="false" id="save-code" data-bs-toggle="modal"
+          data-bs-target="#exampleModal"></span>
+        <% }else{ %>   
+          <span class="iconify" data-icon="fa-regular:save" data-inline="false" id="save-code" 
+           onclick="saveCode()"></span>
+        <% } %>  
+      </div>
+      <div class="user-profile">
+        <a href="/user/<%= currentUser._id  %>"><span class="iconify" id="user-profile" data-icon="gg:profile" data-inline="false"></span></a>
+      </div>
+      <% }else{ %>
+      <div class="login-signup-btn"><a href="/signin">SIGN UP/LOG IN</a></div>
+      <% } %>
+  </div>
+   
+</div>
+<div class="web-editor">
+  <div class="web-code-section">
+    <div class="web-code-container my-shadow">
+      <div class="editor-header">HTML</div>
+      <div id="html-editor" class="web-edit"></div>
+    </div>
+    <div class="web-code-container my-shadow">
+      <div class="editor-header">CSS</div>
+      <div id="css-editor" class="web-edit"></div>
+    </div>
+    <div class="web-code-container my-shadow">
+      <div class="editor-header">JAVASCRIPT</div>
+      <div id="js-editor" class="web-edit"></div>
+    </div>
+  </div>
+  <div class="web-output">
+    <span>OUTPUT:</span>
+    <iframe src="/html/demo.html" frameborder="0" id="web-output-frame" class="my-shadow"></iframe>
+  </div>
+</div>
+
+<script src="https://pagecdn.io/lib/ace/1.4.12/ace.js" crossorigin="anonymous"
+  integrity="sha256-Q9hnBpgBFstzZOr+OKFOWZWfcF5nFXO8Qz48Nmndo6U="></script>
+<script src="/scripts/webeditor.script.js"></script>

@@ -97,7 +97,7 @@ const submitCode = async () => {
     userInput: userinput,
   };
 
-  const url = "http://localhost:80/compile";
+  const url = "http://localhost:80/cp/compile";
   await $.post(url, data, (d) => {
     // console.log(d,d.body.output);
     const formattedOutput = formatOutput(d.output);
@@ -107,15 +107,23 @@ const submitCode = async () => {
 
 const saveCode = () => {
   // alert("hewefn");
-  // console.log('i got clicekd')
+  console.log('i got clicekd');
+  console.log(projectTitle);
   const code = editor.getSession().getValue();
   const language = languages[currentLang].code;
   const vIndex = languages[currentLang].vIndex;
+  let isAlreadySaved = false;
+  // console.log(req.body);
+  if(projectTitle){
+    isAlreadySaved = true;
+  }
+  console.log(code);
   const data = {
     userCode: code,
     lang: language,
     versionIndex: vIndex,
-    title: codeName.value,
+    title: projectTitle || codeName.value,
+    isAlreadySaved:isAlreadySaved
   };
   const url = "http://localhost:80/cpeditor/save";
   $.post(url, data);
