@@ -22,6 +22,7 @@ const catchAsync = require("./utils/catchAsync");
 const MyError = require("./utils/MyErrors");
 const saveProject = require("./utils/saveProject");
 const createWebPage = require('./utils/createWebHtml');
+const saveWebProject = require('./utils/saveWebProject');
 
 const fs = require('fs');
 
@@ -110,7 +111,7 @@ app.post("/cp/compile", async (req, res) => {
 });
 
 app.post('/web/compile',async (req,res)=>{
-  console.log("you hit me!!");
+  // console.log("you hit me!!");
   // console.log(req.body);
   
   const webPage = createWebPage(req.body);
@@ -179,16 +180,8 @@ app.post(
     // console.log(req.body);
     const { userCode, lang, versionIndex, title ,isAlreadySaved} = req.body;
     const user = req.user;
-    // console.log('You hit me!');
-    // console.log(req.body);
     if(isAlreadySaved == 'true'){
-      // const project = await Project.find({title:title});
       await Project.findOneAndUpdate({title:title},{code:userCode})
-      // console.log(project);
-      //console.log(userCode);
-      // project.code = userCode;
-      // await project.save();
-      // console.log(project);
       return res.send('yay');
     }
     await saveProject(user, title, lang, userCode, versionIndex);
@@ -196,13 +189,22 @@ app.post(
   })
 );
 
+app.post('/webeditor/save',catchAsync(async (req,res)=>{
+  console.log("you hit me!!!");
+  console.log(req.body);
+  const {html,css,js,title} = req.body;
+  const user = req.user;
+  await saveWebProject(title,html,css,js,user);
+  res.send('wefw');
+}))
+
 //user routes
 app.get(
   "/user/:id",isUserLoggedIn,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const user = await User.findById(id).populate("projects");
-    console.log(user.projects);
+    // console.log(user.projects);
     // console.log(user);
     res.render("user", { user });
   })

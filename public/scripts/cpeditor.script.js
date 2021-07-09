@@ -107,8 +107,8 @@ const submitCode = async () => {
 
 const saveCode = () => {
   // alert("hewefn");
-  console.log('i got clicekd');
-  console.log(projectTitle);
+  // console.log('i got clicekd');
+  // console.log(projectTitle);
   const code = editor.getSession().getValue();
   const language = languages[currentLang].code;
   const vIndex = languages[currentLang].vIndex;

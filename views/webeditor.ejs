@@ -16,7 +16,7 @@
           data-bs-target="#exampleModal"></span>
         <% }else{ %>   
           <span class="iconify" data-icon="fa-regular:save" data-inline="false" id="save-code" 
-           onclick="saveCode()"></span>
+           onclick="saveWebCode()"></span>
         <% } %>  
       </div>
       <div class="user-profile">
@@ -26,8 +26,26 @@
       <div class="login-signup-btn"><a href="/signin">SIGN UP/LOG IN</a></div>
       <% } %>
   </div>
-   
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">SAVE YOU CODE AS</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" id="code-name" placeholder="main" required>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info text-light" onclick="saveWebCode()" data-bs-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="web-editor">
   <div class="web-code-section">
     <div class="web-code-container my-shadow">
