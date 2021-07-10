@@ -197,10 +197,16 @@ app.post(
 app.post('/webeditor/save',catchAsync(async (req,res)=>{
   console.log("you hit me!!!");
   console.log(req.body);
-  const {html,css,js,title} = req.body;
+  const {html,css,js,title,isAlreadySaved} = req.body;
   const user = req.user;
-  await saveWebProject(title,html,css,js,user);
-  res.send('wefw');
+  if(isAlreadySaved == 'true'){
+    await WebProject.findOneAndUpdate({title:title},{html:html,css:css,js:js});
+    return res.send('updated');
+  }else{
+    await saveWebProject(title,html,css,js,user);
+  }
+  const webProject = await WebProject.find({title});
+  res.send(webProject);
 }))
 
 //user routes

@@ -8,6 +8,8 @@ body {
   place-items: center;
   background-size: cover;
   font-family: 'Josefin Sans', sans-serif;
+  /* font-family: 'Quicksand', sans-serif; */
+  /* font-family: 'Poppins', sans-serif; */
 }
 
 .home-container {
@@ -38,6 +40,7 @@ body {
   font-weight: 900;
   letter-spacing: 4px;
   margin-bottom: 30px;
+  font-family: 'Righteous', cursive;
   color: white;
 }
 .home-greet-text {
@@ -114,4 +117,8 @@ body {
   place-items: center;
   background-color: transparent;
   cursor: pointer;
+  /* font-family: 'Righteous', cursive; */
+  font-family: 'Josefin Sans', sans-serif;
+
+
 }

@@ -65,6 +65,18 @@
     <span>OUTPUT:</span>
     <iframe src="/html/demo.html" frameborder="0" id="web-output-frame" class="my-shadow"></iframe>
   </div>
+  <% if(project){ %> 
+    <div class="invisible-web-container"
+    data-projectHTML = "<%= project.html  %>"
+    data-projectCSS = "<%= project.css  %>"
+    data-projectJS = "<%= project.js   %>"
+    data-projectTitle = "<%= project.title  %>"
+    >
+
+    </div>
+  <% }else{ %>
+    <div class="invisible-web-container"></div>
+   <% } %>     
 </div>
 
 <script src="https://pagecdn.io/lib/ace/1.4.12/ace.js" crossorigin="anonymous"

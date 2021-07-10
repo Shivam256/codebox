@@ -114,7 +114,7 @@ const saveCode = async () => {
   if(projectTitle){
     isAlreadySaved = true;
   }
-  console.log(code);
+  // console.log(code);
   const data = {
     userCode: code,
     lang: language,

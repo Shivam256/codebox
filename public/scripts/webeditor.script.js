@@ -8,7 +8,7 @@ htmlEditor.setOptions({
   enableSnippets: true,
   enableLiveAutocompletion: false,
 });
-const htmlStartPlate = "<body>\n\n</body>"
+const htmlStartPlate = "<body>\n\n</body>";
 htmlEditor.setValue(htmlStartPlate);
 
 const cssEditor = ace.edit("css-editor");
@@ -20,7 +20,6 @@ cssEditor.setOptions({
   enableLiveAutocompletion: false,
 });
 
-
 const jsEditor = ace.edit("js-editor");
 jsEditor.setTheme("ace/theme/monokai");
 jsEditor.session.setMode("ace/mode/javascript");
@@ -30,95 +29,107 @@ jsEditor.setOptions({
   enableLiveAutocompletion: false,
 });
 
-const initializeSessionStorage = (elem,key) => {
-  if(sessionStorage.getItem(key)){
-    elem.setValue(sessionStorage.getItem(key),1);
+let projectHTML = null;
+let projectCSS = null;
+let projectJS = null;
+let isAlreadySaved = false;
+let savedProjectTitle = null;
+
+const iC = document.querySelector(".invisible-web-container");
+if (iC.dataset.projecthtml) {
+  projectHTML = iC.dataset.projecthtml;
+  projectCSS = iC.dataset.projectcss;
+  projectJS = iC.dataset.projectjs;
+  savedProjectTitle = iC.dataset.projecttitle;
+  isAlreadySaved = true;
+}
+
+const initializeSessionStorage = (elem, key,) => {
+  if(sessionStorage.getItem(key)) {
+    elem.setValue(sessionStorage.getItem(key), 1);
+  }
+};
+initializeSessionStorage(htmlEditor, "currentHTML");
+initializeSessionStorage(cssEditor, "currentCSS");
+initializeSessionStorage(jsEditor, "currentJS");
+
+// if(projectHTML){
+//   htmlEditor.setValue(projectHTML);
+// }
+const initializeSavedProject = (elem,code)=>{
+  if(code){
+    elem.setValue(code);
   }
 }
-initializeSessionStorage(htmlEditor,'currentHTML');
-initializeSessionStorage(cssEditor,'currentCSS');
-initializeSessionStorage(jsEditor,'currentJS');
+initializeSavedProject(htmlEditor,projectHTML);
+initializeSavedProject(cssEditor,projectCSS);
+initializeSavedProject(jsEditor,projectJS);
 
-
-const webFrame = document.querySelector('#web-output-frame');
-const refreshBtn = document.querySelector('.refresh-btn');
+const webFrame = document.querySelector("#web-output-frame");
+const refreshBtn = document.querySelector(".refresh-btn");
 const saveBtn = document.querySelector("#save-code");
 const codeName = document.querySelector("#code-name");
 
-const sendCode = async ()=>{
+const sendCode = async () => {
   const htmlCode = htmlEditor.getSession().getValue();
   const cssCode = cssEditor.getSession().getValue();
   const jsCode = jsEditor.getSession().getValue();
 
   const webData = {
-    html:htmlCode,
-    css:cssCode,
-    js:jsCode
-  }
+    html: htmlCode,
+    css: cssCode,
+    js: jsCode,
+  };
 
   const url = "http://localhost:80/web/compile";
   await $.post(url, webData);
-  setTimeout(()=>{
+  setTimeout(() => {
     webFrame.src = webFrame.src;
-  },1000);
-}
+  }, 1000);
+};
 
-// htmlEditor.getSession().addEventListener("change", () => {
-//   setTimeout(()=>{
-//     sendCode();
-//   },1000);
-// });
-
-
-refreshBtn.addEventListener('click',()=>{
+refreshBtn.addEventListener("click", () => {
   sendCode();
-})
-
-// if (!sessionStorage.getItem("currentHTML")) {
-//   sessionStorage.setItem("currentHTML","")
-// }
-// if (!sessionStorage.getItem("currentCSS")) {
-//   sessionStorage.setItem("currentCSS","")
-// }
-// if (!sessionStorage.getItem("currentJS")) {
-//   sessionStorage.setItem("currentJS","")
-// }
+});
 
 const checkSessionStorage = (key) => {
   if (!sessionStorage.getItem(key)) {
-    sessionStorage.setItem(key,"")
+    sessionStorage.setItem(key, "");
   }
-}
-checkSessionStorage('currentHTML');
-checkSessionStorage('currentCSS');
-checkSessionStorage('currentJS');
+};
+checkSessionStorage("currentHTML");
+checkSessionStorage("currentCSS");
+checkSessionStorage("currentJS");
 
-const enableSessionStorage = (key,elem)=> {
-  elem.getSession().addEventListener('change',()=>{
-    sessionStorage.setItem(key,elem.getSession().getValue());
-  })
-}
+const enableSessionStorage = (key, elem) => {
+  elem.getSession().addEventListener("change", () => {
+    sessionStorage.setItem(key, elem.getSession().getValue());
+  });
+};
 
-enableSessionStorage('currentHTML',htmlEditor);
-enableSessionStorage('currentCSS',cssEditor);
-enableSessionStorage('currentJS',jsEditor);
+enableSessionStorage("currentHTML", htmlEditor);
+enableSessionStorage("currentCSS", cssEditor);
+enableSessionStorage("currentJS", jsEditor);
 
-const saveWebCode = () => {
+const saveWebCode = async () => {
   const data = {
-    title:codeName.value,
-    html:htmlEditor.getSession().getValue(),
-    css:cssEditor.getSession().getValue(),
-    js:jsEditor.getSession().getValue()
-  }
-  console.log('i get hitted!!');
+    title: savedProjectTitle || codeName.value,
+    html: htmlEditor.getSession().getValue(),
+    css: cssEditor.getSession().getValue(),
+    js: jsEditor.getSession().getValue(),
+    isAlreadySaved:isAlreadySaved
+  };
+  // console.log("i get hitted!!");
+  // console.log(data);
 
   const url = "http://localhost:80/webeditor/save";
-  $.post(url, data);
-}
-
-
-
-
-
-
-
+  await $.post(url, data,res=>{
+    if(!isAlreadySaved){
+      const id = res[0]._id;
+      const newURL = `http://localhost:80/webeditor/${id}`;
+      window.location.replace(newURL);
+    }else{
+      console.log(res);
+    }
+  });
+};
