@@ -94,7 +94,7 @@ body {
 .login-text{
   font-size: 1.5em;
   font-weight: 500;
-  color: #F72585;
+  color:#7209b7;
 }
 
 .login-card{
@@ -108,6 +108,50 @@ body {
 
 .login-form{
   text-align: center;
+}
+
+
+.navbar-cp {
+  min-height: 8vh;
+  max-height: 8vh;
+  width: 95%;
+  margin: 0 auto;
+  /* background-color: red; */
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid #F72585;
+  font-family: 'Josefin Sans', sans-serif;
+
+}
+
+.codebox-info {
+  width: 20%;
+  /* background-color: lawngreen; */
+  display: flex;
+  flex-direction: row;
+  color: #4cc9f0;
+}
+
+#codebox-icon {
+  width: 30%;
+  height: 100%;
+  color:#7209b7;
+}
+#codebox-name {
+  width: 70%;
+  height: 100%;
+  /* background-color: gold; */
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: 3px;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: #7209B7;
+  /* color:#4cc9f0; */
 }
 
 
