@@ -11,6 +11,10 @@ const UserSchema = new Schema({
   projects:[{
     type:Schema.Types.ObjectId,
     ref:'Project'
+  }],
+  webProjects:[{
+    type:Schema.Types.ObjectId,
+    ref:'WebProject'
   }]
 })
 

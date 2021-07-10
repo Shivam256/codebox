@@ -4,8 +4,8 @@ body {
   width: 100vw;
   background-image: url("https://res.cloudinary.com/dx1ye2bro/image/upload/v1624173081/Group_21_blqdnk.jpg");
   background-position: center;
-  display: grid;
-  place-items: center;
+  /* display: grid;
+  place-items: center; */
   background-size: cover;
   font-family: 'Josefin Sans', sans-serif;
 }
@@ -19,7 +19,6 @@ body {
   justify-content: space-between;
   /* background-color: red; */
 }
-
 .user-profile{
   width: 25%;
   height: 70%;
@@ -54,27 +53,22 @@ body {
   color: #F72585;
 }
 
-
 .user-projects{
   width: 75%;
-  min-height: 100%;
-  max-height: 100%;
-  /* background-color: blue; */
-  display:grid;
-  place-items: center;
+  height: 100%;
+  /* background-color: yellow; */
+  
 }
 
 .projects-section{
   width: 95%;
   height: 100%;
-  /* background-color: red; */
+  /* background-color: blue; */
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
-  justify-content: flex-start;
-
+  justify-content: start;
 }
-
 .search-projects{
   width: 100%;
   height: 10%;
@@ -129,129 +123,81 @@ body {
 .projects{
   width: 100%;
   height: 85%;
-  /* max-height: 85%; */
-  /* background-color: yellow; */
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  /* flex-wrap: nowrap; */
-  justify-content: space-between;
+  /* background-color: pink; */
+  max-height: 85%;
   overflow-y: scroll;
 
 }
 .projects::-webkit-scrollbar{
   display: none;
 }
-/* .i-footer{
-  height: 5%;
-  background-color: red;
-} */
-
-
-/* .project-container{
-  width: 30%;
-  height:30%;
-  max-height: 30%;
-  background-color: white;
-  margin: 0 1em 2em 1em;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-
-}
-.project-container:hover{
-  background-color: rgba(255, 255, 255, 0.925);
-} */
 
 .project-container{
-  width: 30%;
-  height: 30%;
-  /* background-color: blue; */
+  width: 95%;
+  height: fit-content;
   background-color: white;
-  margin: 15px 0;
+  padding: 10px 20px;
+  margin: 15px auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
-  cursor: pointer;
-}
-.project-container:hover{
-  background-color: rgba(233, 233, 233, 0.925);
-} 
-
-.project-title{
-  font-size: 1.8em;
-  /* color: #F72585; */
-  color: #2D2A2E;
-
+  justify-content: space-between;
+  /* cursor: pointer; */
 }
 
-.project-icons{
-  width: 100%;
-  height: 20%;
-  max-height: 20%;
-  background-color: blue;
+.project-info{
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-}
-
-.pj-btn{
-  min-height: 100%;
-  width: 20%;
-  background-color: green;
-}
-
-.delete-project-icon{
-  height: 8%;
-  width: 60%;
-  background-color: red;
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-  margin-top: 1em;
-}
-.delete-icon{
-  width: 50%;
-  height: 100%;
-  color: red;
-  display: inline;
-}
-.delete-icon:hover{
-  color: rgb(199, 0, 0);
-}
-
-
-.edit-icon{
-  width: 50%;
-  height: 100%;
-  color: blue;
-  display: inline;
-}
-/* .delete-project-icon:hover{
-  transform: scale(1.05);
-} */
-
-.project-language-icon{
-  height: 40%;
-  width: 25%;
-  margin: 1em 0 0em 0;
+  width: 30%;
   /* background-color: red; */
+}
+.project-title{
+  font-size: 1.3em;
+  margin: 0 20px;
 }
 
 .project-icon{
-  height: 100%;
-  width: 100%;
+  width: 35px;
+  height: 35px;
   color: #7209B7;
 }
-a{
-  text-decoration: none;
-  color: black;
+
+.project-options{
+  width: 30%;
+  height: 100%;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
+.view-project-btn{
+  width: fit-content;
+  height: fit-content;
+  padding: 5px 15px;
+  /* background-color: #4cc9f0; */
+  color:#7209B7;
+  border: 1px solid #7209B7;
+  cursor: pointer;
+}
+.view-project-btn:hover{
+  background-color: #7209B7;
+  color: white;
+}
+
+.delete-project-btn{
+  width: fit-content;
+  height: fit-content;
+  padding: 5px 15px;
+  /* background-color: red; */
+  color: red;
+  border: 1px solid red;
+  cursor: pointer;
+}
+.delete-project-btn:hover{
+  background-color: red;
+  color: white;
+}
 
 
 .my-btn2{
@@ -263,15 +209,11 @@ a{
   cursor: pointer;
   font-weight: 600;
  font-size: 1.2em; 
-}
-.my-btn2 a{
-  color: #7209B7;
+ color: #7209B7;
 }
 
-.my-btn2:hover{
+.my-btn2:hover {
   background-color: #7209B7;
-}
-.my-btn2:hover >a{
   color: white;
 }
 

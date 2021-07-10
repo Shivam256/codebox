@@ -7,8 +7,10 @@ const saveWebProject = async (title,html,css,js,user) => {
   await webProject.save();
 
   const foundUser = await User.findById(user._id);
-  foundUser.projects.push(webProject);
+  foundUser.webProjects.push(webProject);
   await foundUser.save();
+  console.log(foundUser);
+
 }
 
 module.exports = saveWebProject;

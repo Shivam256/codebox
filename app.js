@@ -17,8 +17,9 @@ const LocalStrategy = require("passport-local");
 
 const User = require("./models/user.model");
 const Project = require("./models/project.model");
-const catchAsync = require("./utils/catchAsync");
+const WebProject = require("./models/webProject.model");
 
+const catchAsync = require("./utils/catchAsync");
 const MyError = require("./utils/MyErrors");
 const saveProject = require("./utils/saveProject");
 const createWebPage = require('./utils/createWebHtml');
@@ -185,7 +186,11 @@ app.post(
       return res.send('yay');
     }
     await saveProject(user, title, lang, userCode, versionIndex);
-    res.send("wekfjnwe");
+
+    const project = await Project.find({title});
+    const idx = project._id;
+    // res.render('cpeditor',{project});
+    res.send(project);
   })
 );
 
@@ -203,7 +208,7 @@ app.get(
   "/user/:id",isUserLoggedIn,
   catchAsync(async (req, res) => {
     const { id } = req.params;
-    const user = await User.findById(id).populate("projects");
+    const user = await User.findById(id).populate("projects").populate("webProjects");
     // console.log(user.projects);
     // console.log(user);
     res.render("user", { user });
@@ -218,6 +223,12 @@ app.get(
     res.render("cpeditor", { project });
   })
 );
+
+app.get("/webeditor/:projectId",isUserLoggedIn,catchAsync(async (req,res)=>{
+  const {projectId} = req.params;
+  const project = await WebProject.findById(projectId);
+  res.render("webeditor",{project});
+}))
 
 app.all("*", (req, res, next) => {
   next(new MyError("Page Not Found!", 404));

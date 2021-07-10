@@ -105,10 +105,7 @@ const submitCode = async () => {
   });
 };
 
-const saveCode = () => {
-  // alert("hewefn");
-  // console.log('i got clicekd');
-  // console.log(projectTitle);
+const saveCode = async () => {
   const code = editor.getSession().getValue();
   const language = languages[currentLang].code;
   const vIndex = languages[currentLang].vIndex;
@@ -126,7 +123,17 @@ const saveCode = () => {
     isAlreadySaved:isAlreadySaved
   };
   const url = "http://localhost:80/cpeditor/save";
-  $.post(url, data);
+  
+  await $.post(url, data,(res)=>{
+    // console.log(res);
+    if(!isAlreadySaved){
+      const id = res[0]._id;
+      const newURL = `http://localhost:80/cpeditor/${id}`;
+      window.location.replace(newURL);
+    }else{
+      console.log(res);
+    }
+  });
 };
 
 // if (currentUser != "null") {
