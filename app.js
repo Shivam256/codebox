@@ -195,8 +195,8 @@ app.post(
 );
 
 app.post('/webeditor/save',catchAsync(async (req,res)=>{
-  console.log("you hit me!!!");
-  console.log(req.body);
+  // console.log("you hit me!!!");
+  // console.log(req.body);
   const {html,css,js,title,isAlreadySaved} = req.body;
   const user = req.user;
   if(isAlreadySaved == 'true'){
@@ -235,6 +235,22 @@ app.get("/webeditor/:projectId",isUserLoggedIn,catchAsync(async (req,res)=>{
   const project = await WebProject.findById(projectId);
   res.render("webeditor",{project});
 }))
+
+app.post("/user/:userId/projects",catchAsync(async (req,res)=>{
+  // console.log(req.body);
+  const {userId} = req.params;
+  const user = await User.findById(userId).populate("projects").populate("webProjects");
+  const projects = user.projects;
+  const webProjects = user.webProjects;
+  const data = {
+    cpProjects:projects,
+    webProjects:webProjects
+  }
+  res.send(data);
+}))
+
+
+
 
 app.all("*", (req, res, next) => {
   next(new MyError("Page Not Found!", 404));

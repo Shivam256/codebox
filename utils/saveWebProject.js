@@ -9,7 +9,7 @@ const saveWebProject = async (title,html,css,js,user) => {
   const foundUser = await User.findById(user._id);
   foundUser.webProjects.push(webProject);
   await foundUser.save();
-  console.log(foundUser);
+  // console.log(foundUser);
 
 }
 

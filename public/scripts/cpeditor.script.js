@@ -130,8 +130,6 @@ const saveCode = async () => {
       const id = res[0]._id;
       const newURL = `http://localhost:80/cpeditor/${id}`;
       window.location.replace(newURL);
-    }else{
-      console.log(res);
     }
   });
 };

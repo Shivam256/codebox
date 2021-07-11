@@ -1,7 +1,7 @@
 <% layout('./layouts/boilerplate.ejs') -%>
 <link rel="stylesheet" href="/styles/user.styles.css">
 
-<div class="user-page">
+<div class="user-page" data-userid="<%= user._id  %>">
   <div class="user-profile">
     <div class="user-image"><span class="iconify" id="user-img" data-icon="gg:profile" data-inline="false"></span></div>
     <div class="user-username"><%= user.username  %></div>
@@ -19,7 +19,7 @@
   </div>
   <div class="user-projects">
     <div class="projects-section">
-      <div class="search-projects"><input type="text" placeholder="search projects" name="" id=""></div>
+      <div class="search-projects"><input type="text" placeholder="search projects" name="" id="search-input"></div>
       <div class="projects">
         <% if(1==1){ %>
         <% for(let project of user.projects){ %>
@@ -39,7 +39,7 @@
           <!-- <h1><%= project.title  %> </h1> -->
         <div class="project-container">
           <div class="project-info">
-            <span class="iconify project-icon" data-icon="foundation:web" data-inline="false"></span>
+            <span class="iconify project-icon-web" data-icon="foundation:web" data-inline="false"></span>
             <!-- <span class="iconify project-icon" data-inline="false" data-name="<%= project.language %>"></span> -->
             <div class="project-title"><%= project.title  %></div>
           </div>
@@ -55,6 +55,6 @@
     </div>
   </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/scripts/iconmap.js"></script>
 <script src="/scripts/user.script.js"></script>
