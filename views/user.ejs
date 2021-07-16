@@ -1,7 +1,7 @@
 <% layout('./layouts/boilerplate.ejs') -%>
 <link rel="stylesheet" href="/styles/user.styles.css">
 
-<div class="user-page" data-userid="<%= user._id  %>">
+<div class="user-page" data-userid="<%= user._id  %>" data-state = "<%= isInProduction  %>">
   <div class="user-profile">
     <div class="user-image"><span class="iconify" id="user-img" data-icon="gg:profile" data-inline="false"></span></div>
     <div class="user-username"><%= user.username  %></div>

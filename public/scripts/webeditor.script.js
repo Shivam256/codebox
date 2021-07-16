@@ -36,12 +36,20 @@ let isAlreadySaved = false;
 let savedProjectTitle = null;
 
 const iC = document.querySelector(".invisible-web-container");
+const projectInProduction = iC.dataset.state;
 if (iC.dataset.projecthtml) {
   projectHTML = iC.dataset.projecthtml;
   projectCSS = iC.dataset.projectcss;
   projectJS = iC.dataset.projectjs;
   savedProjectTitle = iC.dataset.projecttitle;
   isAlreadySaved = true;
+}
+
+let MAIN_URL = "";
+if(projectInProduction == "false"){
+  MAIN_URL  = "http://localhost:8080";
+}else{
+  MAIN_URL = "https://itscodebox.herokuapp.com";
 }
 
 const initializeSessionStorage = (elem, key,) => {
@@ -81,7 +89,8 @@ const sendCode = async () => {
     js: jsCode,
   };
 
-  const url = "http://localhost:8080/web/compile";
+  // const url = "http://localhost:8080/web/compile";
+  const url = `${MAIN_URL}/web/compile`;
   await $.post(url, webData);
   setTimeout(() => {
     webFrame.src = webFrame.src;
@@ -122,11 +131,13 @@ const saveWebCode = async () => {
   // console.log("i get hitted!!");
   // console.log(data);
 
-  const url = "http://localhost:8080/webeditor/save";
+  // const url = "http://localhost:8080/webeditor/save";
+  const url = `${MAIN_URL}/webeditor/save`;
   await $.post(url, data,res=>{
     if(!isAlreadySaved){
       const id = res[0]._id;
-      const newURL = `http://localhost:8080/webeditor/${id}`;
+      const newURL = `${MAIN_URL}/webeditor/${id}`;
+      // const newURL = `http://localhost:8080/webeditor/${id}`;
       window.location.replace(newURL);
     }else{
       console.log(res);

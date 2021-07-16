@@ -9,14 +9,23 @@ const projectSection = document.querySelector(".projects");
 const projects = document.querySelectorAll(".project-container");
 const userPage = document.querySelector(".user-page");
 const userId = userPage.dataset.userid;
+const projectInProduction = userPage.dataset.state;
 let cpProjects = [];
 let webProjects = [];
 let allProjects = [];
 const input = document.querySelector("#search-input");
 let deleteBtns;
 
+let MAIN_URL = "";
+if(projectInProduction == "false"){
+  MAIN_URL  = "http://localhost:8080";
+}else{
+  MAIN_URL = "https://itscodebox.herokuapp.com";
+}
+
 const getProjectsFromServer = async (userid) => {
-  const url = `http://localhost:8080/user/${userid}/projects`;
+  // const url = `http://localhost:8080/user/${userid}/projects`;
+  const url = `${MAIN_URL}/user/${userid}/projects`;
   const data = { id: userid };
   const projectData = await axios.post(url, data);
   //console.log(projectData);
@@ -38,10 +47,12 @@ const deleteProject = async (project,elem) => {
  
   projectSection.removeChild(elem);
   if(!project.html){
-    const url = `http://localhost:8080/cpprojects/${id}`;
+    // const url = `http://localhost:8080/cpprojects/${id}`;
+    const url = `${MAIN_URL}/cpprojects/${id}`;
     await axios.delete(url);
   }else{
-    const url = `http://localhost:8080/webprojects/${id}`;
+    // const url = `http://localhost:8080/webprojects/${id}`;
+    const url = `${MAIN_URL}/webprojects/${id}`;
     await axios.delete(url);
   }
 }
@@ -104,12 +115,6 @@ const fillProjects = (userprojects) => {
   }
 
 }
-
-
-
-
-
-
 
 
 const initializeUserPage = async (uid) => {

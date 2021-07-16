@@ -89,6 +89,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  res.locals.isInProduction = (process.env.NODE_ENV == "production");
   // res.locals.testContent = "wkdjsnwkfevn kwejbhwe weifuh";
   next();
 });

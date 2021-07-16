@@ -9,6 +9,7 @@ editor.setOptions({
 
 
 
+
 const inputEditor = ace.edit("input-container");
 inputEditor.setTheme("ace/theme/monokai");
 inputEditor.session.setMode("ace/mode/txt");
@@ -26,11 +27,24 @@ const codeName = document.querySelector("#code-name");
 
 let projectTitle = null,projectCode = null,projectLang = null;
 
+let projectInProduction = "";
+
 const projectData = document.querySelector("#invisible-container");
+projectInProduction = projectData.dataset.state;
+
 if(projectData.dataset.projectTitle){
   projectTitle = projectData.dataset.projectTitle;
   projectCode = projectData.dataset.projectCode;
   projectLang = langIcons[projectData.dataset.projectLang].name;
+  
+}
+
+
+let MAIN_URL = "";
+if(projectInProduction == "false"){
+  MAIN_URL  = "http://localhost:8080";
+}else{
+  MAIN_URL = "https://itscodebox.herokuapp.com";
 }
 
 const setLanguage = (lang) => {
@@ -97,7 +111,8 @@ const submitCode = async () => {
     userInput: userinput,
   };
 
-  const url = "http://localhost:8080/cp/compile";
+  // const url =  "http://localhost:8080/cp/compile";
+  const url = `${MAIN_URL}/cp/compile`;
   await $.post(url, data, (d) => {
     // console.log(d,d.body.output);
     const formattedOutput = formatOutput(d.output);
@@ -122,13 +137,15 @@ const saveCode = async () => {
     title: projectTitle || codeName.value,
     isAlreadySaved:isAlreadySaved
   };
-  const url = "http://localhost:8080/cpeditor/save";
+  // const url = "http://localhost:8080/cpeditor/save";
+  const url = `${MAIN_URL}/cpeditor/save`;
   
   await $.post(url, data,(res)=>{
     // console.log(res);
     if(!isAlreadySaved){
       const id = res[0]._id;
-      const newURL = `http://localhost:8080/cpeditor/${id}`;
+      // const newURL = `http://localhost:8080/cpeditor/${id}`;
+      const newUrl = `${MAIN_URL}/cpeditor/${id}`;
       window.location.replace(newURL);
     }
   });

@@ -81,11 +81,12 @@
       data-project-title = "<%= project.title   %>"
       data-project-lang = "<%= project.language  %>"
       data-project-code = "<%= project.code  %>"
+      
     >
 
     </div>
   <% }else{ %>
-    <div id="invisible-container"></div>
+    <div id="invisible-container" data-state = "<%= isInProduction  %>"></div>
   <% } %>       
 </div>
 <!-- <div class="head-section"></div>
