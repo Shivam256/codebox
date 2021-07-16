@@ -97,7 +97,7 @@ const submitCode = async () => {
     userInput: userinput,
   };
 
-  const url = "http://localhost:80/cp/compile";
+  const url = "http://localhost:8080/cp/compile";
   await $.post(url, data, (d) => {
     // console.log(d,d.body.output);
     const formattedOutput = formatOutput(d.output);
@@ -122,13 +122,13 @@ const saveCode = async () => {
     title: projectTitle || codeName.value,
     isAlreadySaved:isAlreadySaved
   };
-  const url = "http://localhost:80/cpeditor/save";
+  const url = "http://localhost:8080/cpeditor/save";
   
   await $.post(url, data,(res)=>{
     // console.log(res);
     if(!isAlreadySaved){
       const id = res[0]._id;
-      const newURL = `http://localhost:80/cpeditor/${id}`;
+      const newURL = `http://localhost:8080/cpeditor/${id}`;
       window.location.replace(newURL);
     }
   });

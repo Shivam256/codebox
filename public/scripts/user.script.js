@@ -16,7 +16,7 @@ const input = document.querySelector("#search-input");
 let deleteBtns;
 
 const getProjectsFromServer = async (userid) => {
-  const url = `http://localhost:80/user/${userid}/projects`;
+  const url = `http://localhost:8080/user/${userid}/projects`;
   const data = { id: userid };
   const projectData = await axios.post(url, data);
   //console.log(projectData);
@@ -38,10 +38,10 @@ const deleteProject = async (project,elem) => {
  
   projectSection.removeChild(elem);
   if(!project.html){
-    const url = `http://localhost:80/cpprojects/${id}`;
+    const url = `http://localhost:8080/cpprojects/${id}`;
     await axios.delete(url);
   }else{
-    const url = `http://localhost:80/webprojects/${id}`;
+    const url = `http://localhost:8080/webprojects/${id}`;
     await axios.delete(url);
   }
 }

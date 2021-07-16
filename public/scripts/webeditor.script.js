@@ -81,7 +81,7 @@ const sendCode = async () => {
     js: jsCode,
   };
 
-  const url = "http://localhost:80/web/compile";
+  const url = "http://localhost:8080/web/compile";
   await $.post(url, webData);
   setTimeout(() => {
     webFrame.src = webFrame.src;
@@ -122,11 +122,11 @@ const saveWebCode = async () => {
   // console.log("i get hitted!!");
   // console.log(data);
 
-  const url = "http://localhost:80/webeditor/save";
+  const url = "http://localhost:8080/webeditor/save";
   await $.post(url, data,res=>{
     if(!isAlreadySaved){
       const id = res[0]._id;
-      const newURL = `http://localhost:80/webeditor/${id}`;
+      const newURL = `http://localhost:8080/webeditor/${id}`;
       window.location.replace(newURL);
     }else{
       console.log(res);

@@ -4,7 +4,7 @@ if (process.NODE_ENV !== "production") {
 
 const express = require("express");
 const app = express();
-const PORT = 80;
+const PORT = 8080;
 const engine = require("ejs-mate");
 const path = require("path");
 const mongoose = require("mongoose");
@@ -27,6 +27,11 @@ const saveWebProject = require('./utils/saveWebProject');
 
 const fs = require('fs');
 
+const MongoDBStore = require('connect-mongo');
+
+const dbUrl = process.env.DB_URL2 || 'mongodb://localhost:27017/codebox';
+// const dbUrl = 'mongodb://localhost:27017/codebox';
+
 
 const {isUserLoggedIn,isProjectAuthor,isWebProjectAuthor} = require('./middlewares');
 
@@ -38,9 +43,11 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 mongoose
-  .connect("mongodb://localhost:27017/codebox", {
+  .connect(dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify:false,
+    useCreateIndex:true
   })
   .then(() => {
     console.log("SUCCESSFULLY CONNECTED TO DATABASE");
@@ -50,8 +57,18 @@ mongoose
     console.log(err);
   });
 
+const store = MongoDBStore.create({
+  mongoUrl:dbUrl,
+  secret:process.env.SESSION_SECRET,
+  touchAfter:24*60*60
+})
+
+store.on("error",(e)=>{
+  console.log("SESSION STORE ERROR",e);
+})
 //congiguring sessions
 const sessionConfig = {
+  store,
   secret: process.env.SESSION_SECRET,
   cookie: {
     httpOnly: true,
