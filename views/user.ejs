@@ -31,7 +31,7 @@
           </div>
           <div class="project-options">
             <a href="/cpeditor/<%= project._id  %>" class="view-project-btn">VIEW</a>
-            <div class="delete-project-btn">DELETE</div>
+            <div class="delete-project-btn" data-projectid = "<%= project._id  %>">DELETE</div>
           </div>
         </div>
         <% } %>
@@ -45,7 +45,7 @@
           </div>
           <div class="project-options">
             <a href="/webeditor/<%= project._id  %>" class="view-project-btn">VIEW</a>
-            <div class="delete-project-btn">DELETE</div>
+            <div class="delete-project-btn" data-projectid = "<%= project._id  %>">DELETE</div>
           </div>
         </div>
         <% } %>

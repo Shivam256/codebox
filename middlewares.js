@@ -1,5 +1,6 @@
 // const User = require("./models/user.model");
 const Project = require("./models/project.model");
+const WebProject = require("./models/webProject.model");
 // const catchAsync = require("./utils/catchAsync");
 
 module.exports.isUserLoggedIn = (req,res,next)=>{
@@ -24,4 +25,14 @@ module.exports.isProjectAuthor = async (req,res,next)=>{
   }
 }
 
+module.exports.isWebProjectAuthor = async (req,res,next) => {
+  const {projectId} = req.params;
+  const project = await WebProject.findById(projectId);
+
+  if(!project.author.equals(req.user._id)){
+    return res.redirect('/');
+  }else{
+    next();
+  }
+}
 

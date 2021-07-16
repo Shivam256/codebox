@@ -28,7 +28,7 @@ const saveWebProject = require('./utils/saveWebProject');
 const fs = require('fs');
 
 
-const {isUserLoggedIn,isProjectAuthor} = require('./middlewares');
+const {isUserLoggedIn,isProjectAuthor,isWebProjectAuthor} = require('./middlewares');
 
 app.engine("ejs", engine);
 app.set("view engine", "ejs");
@@ -230,7 +230,7 @@ app.get(
   })
 );
 
-app.get("/webeditor/:projectId",isUserLoggedIn,catchAsync(async (req,res)=>{
+app.get("/webeditor/:projectId",isUserLoggedIn,isWebProjectAuthor,catchAsync(async (req,res)=>{
   const {projectId} = req.params;
   const project = await WebProject.findById(projectId);
   res.render("webeditor",{project});
@@ -249,6 +249,26 @@ app.post("/user/:userId/projects",catchAsync(async (req,res)=>{
   res.send(data);
 }))
 
+
+app.delete('/cpprojects/:projectId',isUserLoggedIn,catchAsync(async (req,res)=>{
+  // console.log("i got hit cp");
+  const {projectId} = req.params;
+  await Project.findByIdAndDelete(projectId);
+
+  const user = await User.findById(req.user._id);
+  user.projects = user.projects.filter((proj)=>(!proj._id.equals(projectId)));
+  await user.save();
+  
+}))
+app.delete('/webprojects/:projectId',isUserLoggedIn,catchAsync(async (req,res)=>{
+  // console.log("i got hit web");
+  const {projectId} = req.params;
+  await WebProject.findByIdAndDelete(projectId);
+
+  const user = await User.findById(req.user._id);
+  user.webProjects = user.webProjects.filter(proj => (!proj._id.equals(projectId)));
+  await user.save();
+}))
 
 
 
