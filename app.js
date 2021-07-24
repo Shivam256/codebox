@@ -10,6 +10,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const flash = require("connect-flash");
 const axios = require("axios");
+const cors = require('cors');
 
 const session = require("express-session");
 const passport = require("passport");
@@ -41,6 +42,7 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
+app.use(cors())
 
 mongoose
   .connect(dbUrl, {
