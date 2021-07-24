@@ -23,7 +23,7 @@ const WebProject = require("./models/webProject.model");
 const catchAsync = require("./utils/catchAsync");
 const MyError = require("./utils/MyErrors");
 const saveProject = require("./utils/saveProject");
-const createWebPage = require('./utils/createWebHtml');
+const {createWebPage,blankWebPage} = require('./utils/createWebHtml');
 const saveWebProject = require('./utils/saveWebProject');
 
 const fs = require('fs');
@@ -110,6 +110,13 @@ app.get("/cpeditor", (req, res) => {
 
 app.get("/webeditor",(req,res)=>{
   const project = null;
+  const blankPage = blankWebPage();
+  try{
+    const data = fs.writeFileSync('./public/html/demo.html',blankPage);
+  }catch(err){
+    console.log(err);
+  }
+
   res.render("webeditor",{project});
 })
 
